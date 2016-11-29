@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<head>
+</head>
+
+<body>
+	<h:form id="form">
+   		<p:growl id="msgs" showDetail="true"/>
+   		
+   		<p:dataTable id="film" var="f" value="#{dtEditView.listaFilm}" editable="true" style="margin-bottom:20px">
+       		<f:facet name="header">
+           		Row Editing
+       		</f:facet>
+       		
+       		<p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}" update=":form:msgs" />
+       		<p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}" update=":form:msgs" />
+       		
+<!--        		<p:column headerText="Id" visible=""> -->
+<!--            		<p:cellEditor> -->
+<!--               		<f:facet name="output"><h:outputText value="#{film.id_film}" /></f:facet> -->
+<!--                		<f:facet name="input"><p:inputText id="modelInput" value="#{film.id_film}" style="width:100%"/></f:facet> -->
+<!--            		</p:cellEditor> -->
+<!--        		</p:column> -->
+
+			<p:column headerText="Titolo">
+           		<p:cellEditor>
+              		<f:facet name="output"><h:outputText value="#{f.nomeFilm}" /></f:facet>
+               		<f:facet name="input"><p:inputText id="modelInput" value="#{f.nomeFilm}" style="width:100%"/></f:facet>
+           		</p:cellEditor>
+       		</p:column>
+       		
+       		<p:column headerText="Data Uscita">
+           		<p:cellEditor>
+              		<f:facet name="output"><h:outputText value="#{f.data}" /></f:facet>
+               		<f:facet name="input"><p:inputText  value="#{f.data}" style="width:100%" label="Data Uscita"/></f:facet>
+           		</p:cellEditor>
+       		</p:column>
+       		
+       		<p:column headerText="Regista">
+           		<p:cellEditor>
+              		<f:facet name="output"><h:outputText value="#{f.nomeRegista}" /></f:facet>
+               		<f:facet name="input"><p:inputText  value="#{f.nomeRegista}" style="width:100%" label="Regista"/></f:facet>
+           		</p:cellEditor>
+       		</p:column>
+       		
+       		<p:column headerText="Genere">
+           		<p:cellEditor>
+              		<f:facet name="output"><h:outputText value="#{f.genere}" /></f:facet>
+               		<f:facet name="input">
+               			<h:selectOneMenu value="#{f.genere}" style="width:100%">
+               				<f:selectItems value="#{dtEditView.generi}" var="genere" itemLabel="#{genere}" itemValue="#{genere}"/>
+               			</h:selectOneMenu>
+               		</f:facet>
+           		</p:cellEditor>
+       		</p:column>
+       		
+       		<p:column headerText="Codice Film">
+           		<p:cellEditor>
+              		<f:facet name="output"><h:outputText value="#{f.codiceFilm}" /></f:facet>
+               		<f:facet name="input"><p:inputText  value="#{f.codiceFilm}" style="width:100%" label="Codice Film"/></f:facet>
+           		</p:cellEditor>
+       		</p:column>
+       		
+       		<p:column style="width:32px">
+          		 <p:rowEditor />
+<!--            <p:menuitem actionListener="#{buttonView.buttonAction}" id="iconOnly" icon="fa fa-trash"/> -->
+       		</p:column>
+       
+<!--        <p:column style="width:32px"> -->
+<!--           <p:commandLink action="#{dtEditView.delete(f)}" onclick="if(!confirm('sei sicuro che vuoi cancellare?'))return false" id="iconOnly" update="form"> -->
+<!--              <i class="ui-icon ui-icon-trash"/> -->
+<!--           </p:commandLink> -->
+<!--        </p:column> -->
+   
+   </p:dataTable>
+       		
+       		
+       		
+       		
+</h:form>
+</body>
+</html>
